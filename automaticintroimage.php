@@ -39,6 +39,12 @@ class plgContentAutomaticIntroImage extends JPlugin
                         return true;
                 }
                 
+                // Check ImageMagick
+                if (!extension_loaded('imagick'))
+                {
+                        return true;
+                }
+                
                 $images = json_decode($article->images);
                 
                 // Return if full article image is not set or empty
