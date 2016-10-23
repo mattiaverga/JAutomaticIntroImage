@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.2" type="plugin" group="content" method="upgrade">
+        <name>Content - Automatic Intro Image</name>
+        <author>Mattia Verga</author>
+        <creationDate>23 October 2016</creationDate>
+        <copyright>Copyright (C) 2016 Mattia Verga. All rights reserved.</copyright>
+        <license>GNU General Public License version 3 or later.</license>
+        <authorEmail>mattia.verga@tiscali.it</authorEmail>
+        <version>1.0</version>
+        <description>PLG_CONTENT_AUTOMATICINTROIMAGE_XML_DESCRIPTION</description>
+        <files>
+                <filename plugin="automaticintroimage">automaticintroimage.php</filename>
+                <filename>index.html</filename>
+                <folder>language</folder>
+        </files>
+        <languages>
+            <language tag="en-GB">language/en-GB/en-GB.plg_content_automaticintroimage.ini</language>
+            <language tag="en-GB">language/en-GB/en-GB.plg_content_automaticintroimage.sys.ini</language>
+            <language tag="it-IT">language/it-IT/it-IT.plg_content_automaticintroimage.ini</language>
+            <language tag="it-IT">language/it-IT/it-IT.plg_content_automaticintroimage.sys.ini</language>
+        </languages>
+        <config>
+                <fields name="params">
+
+                        <fieldset name="basic">
+                                <field name="Width" type="number"
+                                        default="320"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_WIDTH_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_WIDTH_LABEL"
+                                        filter="integer"
+                                        min="10"
+                                        max="2000"
+                                        size="4"
+                                        required="1"
+                                />
+                                
+                                <field name="Height" type="number"
+                                        default="240"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_HEIGHT_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_HEIGHT_LABEL"
+                                        filter="integer"
+                                        min="10"
+                                        max="2000"
+                                        size="4"
+                                        required="1"
+                                />
+                                
+                                <field name="MaintainAspectRatio" type="radio"
+                                        default="1"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_RATIO_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_RATIO_LABEL"
+                                >
+                                        <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_NO</option>
+                                        <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_YES</option>
+                                </field>
+                                
+                                <field name="CopyAltTitle" type="radio"
+                                        default="1"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_TEXT_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_TEXT_LABEL"
+                                >
+                                        <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_NO</option>
+                                        <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_YES</option>
+                                </field>
+                                
+                                <field name="Suffix" type="text"
+                                        default="_thumb"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUFFIX_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUFFIX_LABEL"
+                                        required="1"
+                                />
+                                
+                                
+                        </fieldset>
+
+                </fields>
+        </config>
+</extension>
