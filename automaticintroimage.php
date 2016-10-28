@@ -39,14 +39,15 @@ class plgContentAutomaticIntroImage extends JPlugin
                         return true;
                 }
                 
+                $images = json_decode($article->images);
+                
                 // Check ImageMagick
                 if (!extension_loaded('imagick'))
                 {
+                        JFactory::getApplication()->enqueueMessage(JText::_('PLG_CONTENT_AUTOMATICINTROIMAGE_MESSAGE_IMAGICK_ERROR'), 'error');
                         return true;
                 }
-                
-                $images = json_decode($article->images);
-                
+
                 // Return if full article image is not set or empty
                 if (!isset($images->image_fulltext) or empty($images->image_fulltext))
                 {
@@ -56,6 +57,7 @@ class plgContentAutomaticIntroImage extends JPlugin
                 // Return if intro image is already set
                 if (isset($images->image_intro) and !empty($images->image_intro))
                 {
+                        JFactory::getApplication()->enqueueMessage(JText::_('PLG_CONTENT_AUTOMATICINTROIMAGE_MESSAGE_ALREADY_SET'), 'notice');
                         return true;
                 }
                 
@@ -108,6 +110,11 @@ class plgContentAutomaticIntroImage extends JPlugin
                 if (!file_exists(JPATH_ROOT . '/' . $images->image_intro))
                 {
                     $thumb->writeImage(JPATH_ROOT . '/' . $images->image_intro);
+                    JFactory::getApplication()->enqueueMessage(JText::sprintf('PLG_CONTENT_AUTOMATICINTROIMAGE_MESSAGE_CREATED', $images->image_intro), 'message');
+                }
+                else
+                {
+                    JFactory::getApplication()->enqueueMessage(JText::sprintf('PLG_CONTENT_AUTOMATICINTROIMAGE_MESSAGE_EXIST', $images->image_intro), 'message');
                 }
                 
                 $article->images = json_encode($images);
