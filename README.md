@@ -8,5 +8,8 @@ Automatic Intro Image needs IMagick php module to be installed and enabled on yo
 See https://github.com/mattiaverga/JAutomaticIntroImage/wiki for more help.
 
 ## Changelog
+### v1.1
+* Give some messages when saving article
+
 ### v1.0
 * Initial release
