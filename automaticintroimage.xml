@@ -22,7 +22,33 @@
         <config>
                 <fields name="params">
 
-                        <fieldset name="basic">
+                        <fieldset name="name" label="PLG_CONTENT_AUTOMATICINTROIMAGE_FIELD_NAME_LABEL">
+                                <field name="Suffix" type="text"
+                                        default="_thumb"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUFFIX_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUFFIX_LABEL"
+                                        required="1"
+                                />
+                                
+                                <field name="PutInSubdir" type="radio"
+                                        default="0"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_PUTSUBDIR_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_PUTSUBDIR_LABEL"
+                                >
+                                        <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_NO</option>
+                                        <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_YES</option>
+                                </field>
+                                
+                                <field name="Subdir" type="text"
+                                        default="thumb"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUBDIR_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUBDIR_LABEL"
+                                        required="1"
+                                        showon="PutInSubdir:1"
+                                />
+                        </fieldset>
+                        
+                        <fieldset name="image" label="PLG_CONTENT_AUTOMATICINTROIMAGE_FIELD_IMAGE_LABEL">
                                 <field name="Width" type="number"
                                         default="320"
                                         description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_WIDTH_DESCRIPTION"
@@ -53,7 +79,28 @@
                                         <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_NO</option>
                                         <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_YES</option>
                                 </field>
+                                <field name="ChangeImageQuality" type="radio"
+                                        default="0"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_CHGIMGQLTY_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_CHGIMGQLTY_LABEL"
+                                >
+                                        <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_NO</option>
+                                        <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_YES</option>
+                                </field>
                                 
+                                <field name="ImageQuality" type="number"
+                                        default="92"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_IMGQLTY_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_IMGQLTY_LABEL"
+                                        filter="integer"
+                                        min="50"
+                                        max="100"
+                                        size="3"
+                                        required="1"
+                                        showon="ChangeImageQuality:1"
+                                />
+                        </fieldset>
+                        <fieldset name="misc" label="PLG_CONTENT_AUTOMATICINTROIMAGE_FIELD_MISC_LABEL">
                                 <field name="CopyAltTitle" type="radio"
                                         default="1"
                                         description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_TEXT_DESCRIPTION"
@@ -62,17 +109,7 @@
                                         <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_NO</option>
                                         <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_YES</option>
                                 </field>
-                                
-                                <field name="Suffix" type="text"
-                                        default="_thumb"
-                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUFFIX_DESCRIPTION"
-                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_SUFFIX_LABEL"
-                                        required="1"
-                                />
-                                
-                                
                         </fieldset>
-
                 </fields>
         </config>
 </extension>

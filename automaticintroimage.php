@@ -61,8 +61,19 @@ class plgContentAutomaticIntroImage extends JPlugin
                         return true;
                 }
                 
-                $width = $this->params->get('Width');
-                $height = $this->params->get('Height');
+               
+                $width = (int)$this->params->get('Width');
+                $height = (int)$this->params->get('Height');
+                $compression_level = (int)$this->params->get('ImageQuality');
+                
+                // Check plugin settings
+                if ($compression_level < 50 OR $compression_level > 100 OR
+                    $width < 10 OR $width > 2000 OR
+                    $height < 10 OR $height > 2000)
+                {
+                        JFactory::getApplication()->enqueueMessage(JText::_('PLG_CONTENT_AUTOMATICINTROIMAGE_MESSAGE_SETTINGS_ERROR'), 'error');
+                        return true;
+                }
                 
                 // Create resized image
                 $thumb = new Imagick(JPATH_ROOT . '/' . $images->image_fulltext);
@@ -73,6 +84,10 @@ class plgContentAutomaticIntroImage extends JPlugin
                                     1,
                                     $this->params->get('MaintainAspectRatio')
                                     );
+                if ($this->params->get('ChangeImageQuality') == 1)
+                {
+                    $thumb->setImageCompressionQuality($compression_level);
+                }
                 
                 // Get real image dimensions if maintain aspect ratio was selected
                 if ($this->params->get('MaintainAspectRatio') == 1)
@@ -95,6 +110,22 @@ class plgContentAutomaticIntroImage extends JPlugin
                 $images->image_intro = substr($images->image_fulltext, 0, $extension_pos) . 
                                         $suffix . 
                                         substr($images->image_fulltext, $extension_pos);
+                
+                // Put the image in a subdir if set to do so
+                if ($this->params->get('PutInSubdir') == 1)
+                {
+                    $subdir_pos = strrpos($images->image_intro, '/');
+                    $images->image_intro = substr($images->image_intro, 0, $subdir_pos) . 
+                                        '/' . $this->params->get('Subdir') .
+                                        substr($images->image_intro, $subdir_pos);
+                
+                    // Check if the subdir already exist or create it
+                    $img_subdir = JPATH_ROOT . '/' . substr($images->image_intro, 0, strrpos($images->image_intro, '/'));
+                    if (!JFolder::exists($img_subdir))
+                    {
+                        JFolder::create($img_subdir);
+                    }
+                }
                 
                 // Copy Alt and Title fields
                 if ($this->params->get('CopyAltTitle') == 1 and 
