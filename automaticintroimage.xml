@@ -2,11 +2,11 @@
 <extension version="3.2" type="plugin" group="content" method="upgrade">
         <name>Content - Automatic Intro Image</name>
         <author>Mattia Verga</author>
-        <creationDate>15 October 2016</creationDate>
+        <creationDate>20 November 2016</creationDate>
         <copyright>Copyright (C) 2016 Mattia Verga. All rights reserved.</copyright>
         <license>GNU General Public License version 3 or later.</license>
         <authorEmail>mattia.verga@tiscali.it</authorEmail>
-        <version>1.1</version>
+        <version>1.2</version>
         <description>PLG_CONTENT_AUTOMATICINTROIMAGE_XML_DESCRIPTION</description>
         <files>
                 <filename plugin="automaticintroimage">automaticintroimage.php</filename>

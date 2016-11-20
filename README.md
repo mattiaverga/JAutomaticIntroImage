@@ -9,6 +9,10 @@ See https://github.com/mattiaverga/JAutomaticIntroImage/wiki for more help.
 
 ## Changelog
 ### v1.1
+* New feature: image in subdirectory
+* New feature: set custom JPEG compression
+
+### v1.1
 * Give some messages when saving article
 
 ### v1.0
