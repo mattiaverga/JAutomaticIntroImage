@@ -2,11 +2,11 @@
 <extension version="3.2" type="plugin" group="content" method="upgrade">
         <name>Content - Automatic Intro Image</name>
         <author>Mattia Verga</author>
-        <creationDate>20 November 2016</creationDate>
-        <copyright>Copyright (C) 2016 Mattia Verga. All rights reserved.</copyright>
+        <creationDate>2 June 2017</creationDate>
+        <copyright>Copyright (C) 2017 Mattia Verga. All rights reserved.</copyright>
         <license>GNU General Public License version 3 or later.</license>
         <authorEmail>mattia.verga@tiscali.it</authorEmail>
-        <version>1.2</version>
+        <version>1.3</version>
         <description>PLG_CONTENT_AUTOMATICINTROIMAGE_XML_DESCRIPTION</description>
         <files>
                 <filename plugin="automaticintroimage">automaticintroimage.php</filename>
@@ -99,6 +99,15 @@
                                         required="1"
                                         showon="ChangeImageQuality:1"
                                 />
+                                
+                                <field name="SetProgressiveJPG" type="radio"
+                                        default="1"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_PROGRESSIVE_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_PROGRESSIVE_LABEL"
+                                >
+                                        <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_NO</option>
+                                        <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_YES</option>
+                                </field>
                         </fieldset>
                         <fieldset name="misc" label="PLG_CONTENT_AUTOMATICINTROIMAGE_FIELD_MISC_LABEL">
                                 <field name="CopyAltTitle" type="radio"

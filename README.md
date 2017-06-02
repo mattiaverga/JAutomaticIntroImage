@@ -8,6 +8,9 @@ Automatic Intro Image needs IMagick php module to be installed and enabled on yo
 See https://github.com/mattiaverga/JAutomaticIntroImage/wiki for more help.
 
 ## Changelog
+### v1.3
+* New feature: use progressive JPEG
+
 ### v1.2
 * New feature: image in subdirectory
 * New feature: set custom JPEG compression

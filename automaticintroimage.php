@@ -89,6 +89,11 @@ class plgContentAutomaticIntroImage extends JPlugin
                     $thumb->setImageCompressionQuality($compression_level);
                 }
                 
+                if ($this->params->get('SetProgressiveJPG') == 1)
+                {
+                    $thumb->setInterlaceScheme(Imagick::INTERLACE_PLANE);
+                }
+                
                 // Get real image dimensions if maintain aspect ratio was selected
                 if ($this->params->get('MaintainAspectRatio') == 1)
                 {
