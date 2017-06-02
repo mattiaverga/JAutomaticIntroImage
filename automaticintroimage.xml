@@ -121,4 +121,8 @@
                         </fieldset>
                 </fields>
         </config>
+        <updateservers>
+                <!-- Note: No spaces or linebreaks allowed between the server tags -->
+                <server type="extension" name="Automatic Inro Image Update Site">https://raw.githubusercontent.com/mattiaverga/JAutomaticIntroImage/master/manifest.xml</server>
+        </updateservers>
 </extension>
