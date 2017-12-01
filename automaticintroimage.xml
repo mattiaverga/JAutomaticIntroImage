@@ -22,6 +22,17 @@
         <config>
                 <fields name="params">
 
+                        <fieldset name="basic" label="PLG_CONTENT_AUTOMATICINTROIMAGE_FIELD_PLUGINMODE">
+                                <field name="pluginmode" type="list"
+                                        default="0"
+                                        description="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_PLUGINMODE_DESCRIPTION"
+                                        label="PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_PLUGINMODE_LABEL"
+                                >
+                                        <option value="0">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_GET_FULL_ARTICLE_IMAGE</option>
+                                        <option value="1">PLG_CONTENT_AUTOMATICINTROIMAGE_PARAM_GET_FIRST_IMAGE_FROM_CONTENT</option>
+                                </field>
+                        </fieldset>
+
                         <fieldset name="name" label="PLG_CONTENT_AUTOMATICINTROIMAGE_FIELD_NAME_LABEL">
                                 <field name="Suffix" type="text"
                                         default="_thumb"
