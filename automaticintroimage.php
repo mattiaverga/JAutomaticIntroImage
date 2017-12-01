@@ -48,12 +48,61 @@ class plgContentAutomaticIntroImage extends JPlugin
                         return true;
                 }
 
-                // Return if full article image is not set or empty
-                if (!isset($images->image_fulltext) or empty($images->image_fulltext))
+                // Check plugin mode
+                if ($this->params->get('pluginmode') == 0)
                 {
-                        return true;
+                    // Return if full article image is not set or empty
+                    if (!isset($images->image_fulltext) or empty($images->image_fulltext))
+                    {
+                            return true;
+                    }
+                    else
+                    {
+                            $new_intro_image_src = $images->image_fulltext;
+                    }
                 }
-                
+                else if ($this->params->get('pluginmode') == 1)
+                {
+                    // New simplexml object to get images from content with xpath
+                    $doc = new DOMDocument();
+                    if ($article->fulltext) {
+                            $doc->loadHTML($article->fulltext);
+                    }
+                    else {
+                            $doc->loadHTML($article->introtext);
+                    }
+                    $xml = simplexml_import_dom($doc);
+                    $content_images = $xml->xpath('//img');
+                    $content_images_count = 0;
+                    $content_images_array = array();
+
+                    // New associative array with image attributes
+                    foreach ($content_images as $img) {
+                        if (isset($img['src']))
+                        {
+                            $content_images_array[$content_images_count]['src'] = $img['src']->__toString();
+                        }
+                        if (isset($img['alt']))
+                        {
+                            $content_images_array[$content_images_count]['alt'] = $img['alt']->__toString();
+                        }
+                        if (isset($img['title']))
+                        {
+                            $content_images_array[$content_images_count]['title'] = $img['title']->__toString();
+                        }
+                        $content_images_count++;
+                    }
+
+                    if (empty($content_images_array[0]['src']))
+                    {
+                            return true;
+                    }
+                    else
+                    {
+                            $new_intro_image_src = $content_images_array[0]['src'];
+                    }
+                }
+
                 // Return if intro image is already set
                 if (isset($images->image_intro) and !empty($images->image_intro))
                 {
@@ -76,7 +125,7 @@ class plgContentAutomaticIntroImage extends JPlugin
                 }
                 
                 // Create resized image
-                $thumb = new Imagick(JPATH_ROOT . '/' . $images->image_fulltext);
+                $thumb = new Imagick(JPATH_ROOT . '/' . $new_intro_image_src);
                 
                 $thumb->resizeImage($width,
                                     $height,
@@ -111,10 +160,10 @@ class plgContentAutomaticIntroImage extends JPlugin
                                           array($width,$height),
                                           $suffix);
                 }
-                $extension_pos = strrpos($images->image_fulltext, '.');
-                $images->image_intro = substr($images->image_fulltext, 0, $extension_pos) . 
+                $extension_pos = strrpos($new_intro_image_src, '.');
+                $images->image_intro = substr($new_intro_image_src, 0, $extension_pos) . 
                                         $suffix . 
-                                        substr($images->image_fulltext, $extension_pos);
+                                        substr($new_intro_image_src, $extension_pos);
                 
                 // Put the image in a subdir if set to do so
                 if ($this->params->get('PutInSubdir') == 1)
@@ -133,12 +182,25 @@ class plgContentAutomaticIntroImage extends JPlugin
                 }
                 
                 // Copy Alt and Title fields
-                if ($this->params->get('CopyAltTitle') == 1 and 
-                    ($images->image_fulltext_alt != "" or 
-                    $images->image_fulltext_caption != ""))
+                if ($this->params->get('CopyAltTitle') == 1)
                 {
-                    $images->image_intro_alt = $images->image_fulltext_alt;
-                    $images->image_intro_caption = $images->image_fulltext_caption;
+                    // Check plugin mode
+                    if ($this->params->get('pluginmode') == 0 and 
+                    (strlen($images->image_fulltext_alt) != 0 or 
+                    strlen($images->image_fulltext_caption) != 0))
+                    {
+                        $images->image_intro_alt = $images->image_fulltext_alt;
+                        $images->image_intro_caption = $images->image_fulltext_caption;
+                    }
+                    else if ($this->params->get('pluginmode') == 1)
+                    {
+                        $images->image_intro_alt = $content_images_array[0]['alt'];
+                        $images->image_intro_caption = $content_images_array[0]['title'];
+                    }
+                } else {
+                    $test = strlen($images->image_fulltext_alt);
+                    $test .= strlen($images->image_fulltext_caption);
+                    JFactory::getApplication()->enqueueMessage($test, 'message');
                 }
                 
                 // Write resized image if it doesn't exist
