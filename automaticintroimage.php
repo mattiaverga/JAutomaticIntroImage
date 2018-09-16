@@ -22,7 +22,7 @@ class plgContentAutomaticIntroImage extends JPlugin
         *
         * @param   string   $context  The context of the content being passed to the
         plugin.
-        * @param   mixed    $article  A reference to the JTableContent object that is 
+        * @param   mixed    $article  The JTableContent object that is 
         being saved which holds the article data.
         * @param   boolean  $isNew    A boolean which is set to true if the content
         is about to be created.
@@ -32,7 +32,7 @@ class plgContentAutomaticIntroImage extends JPlugin
         public function onContentBeforeSave($context, $article, $isNew)
         {
                 // Check if we're saving an article
-                $allowed_contexts = array('com_content.article');
+                $allowed_contexts = array('com_content.article','com_content.form');
 
                 if (!in_array($context, $allowed_contexts))
                 {

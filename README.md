@@ -8,6 +8,9 @@ Automatic Intro Image needs IMagick php module to be installed and enabled on yo
 See https://github.com/mattiaverga/JAutomaticIntroImage/wiki for more help.
 
 ## Changelog
+### v1.3.3
+* Fix: allow plugin to work in frontend
+
 ### v1.3.1
 * Add support for Joomla extension updater
 
