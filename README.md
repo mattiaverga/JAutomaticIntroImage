@@ -7,6 +7,9 @@ Automatic Intro Image needs IMagick php module to be installed and enabled on yo
 
 See https://github.com/mattiaverga/JAutomaticIntroImage/wiki for more help.
 
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E41AH8L)
+<img src="http://img.shields.io/liberapay/patrons/mattia.svg?logo=liberapay">
+
 ## Changelog
 ### v1.3.3
 * Fix: allow plugin to work in frontend
